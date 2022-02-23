@@ -1,0 +1,36 @@
+# Version of docker-compose
+version: '3'
+
+# Containers we are going to run
+services:
+  # Our Phoenix and ix2code container
+  phoenix:
+    build: .
+    stdin_open: true 
+    tty: true
+    volumes:
+      - ./src:/home/phoenix/workspace
+    ports:
+      # Mapping the port to make the Phoenix app accessible outside of the container
+      - "4000:4000"
+    depends_on:
+      # The db container needs to be started before we start this container
+      - db
+  
+  db:
+    image: postgres:11
+    ports:
+    - "5432:5432"
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+        - PGADMIN_DEFAULT_EMAIL=admin@ixmatix.com
+        - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+        - "5050:80"
+    depends_on:
+        - db
