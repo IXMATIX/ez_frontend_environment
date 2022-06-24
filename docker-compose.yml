@@ -9,10 +9,10 @@ services:
     stdin_open: true 
     tty: true
     volumes:
-      - ./src:/home/phoenix/workspace
+      - ./src:/home/phoenix/workspace/ez-frontend-app
     ports:
       # Mapping the port to make the Phoenix app accessible outside of the container
-      - "4000:4000"
+      - "4001:4001"
     depends_on:
       # The db container needs to be started before we start this container
       - db
