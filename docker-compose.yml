@@ -5,11 +5,12 @@ version: '3'
 services:
   # Our Phoenix and ix2code container
   phoenix:
-    build: .
+    image: ixmatix/server_ix2code_yuyu
     stdin_open: true 
     tty: true
     volumes:
-      - ./src:/home/phoenix/workspace/ez-frontend-app
+      - ./src:/home/yuyu/workspace
+    working_dir: /home/yuyu/workspace/ez_frontend_api
     ports:
       # Mapping the port to make the Phoenix app accessible outside of the container
       - "4001:4001"
